@@ -26,19 +26,15 @@ ActiveRecord::Schema.define(version: 2020_03_22_022053) do
     t.string "profile_name"
     t.string "bio"
     t.integer "age"
-    t.string "profile_pic"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "profile_pic_file_name"
-    t.string "profile_pic_content_type"
-    t.integer "profile_pic_file_size"
-    t.datetime "profile_pic_updated_at"
   end
 
   create_table "videos", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
     t.string "description"
+    t.string "thumbnail"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "given_video"

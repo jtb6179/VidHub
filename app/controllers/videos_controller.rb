@@ -16,11 +16,15 @@ class VideosController < ApplicationController
         render json: @video
     end
 
+    def home_page
+        byebug
+    end
+
 
 private
 
     def video_params
-        params.require.(:video).permit(:title, :description, :user_id,  :given_video)
+        params.require.(:video).permit(:title, :description, :user_id,  :given_video, :thumbnail)
     end
 
 end
