@@ -29,6 +29,8 @@ gem 'rack-cors'
 
 gem "paperclip", ">= 5.2.0"
 
+gem 'cloudinary'
+
 gem 'carrierwave'
 
 group :development, :test do

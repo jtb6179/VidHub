@@ -6,7 +6,14 @@ class VideosController < ApplicationController
     end
 
     def create
-        @video = Video.create(video_params)  
+        # byebug
+        thumbnail =  Cloudinary::Uploader.upload(params[:thumbnail])
+        given_video = Cloudinary::Uploader.upload_large(params[:given_video], :resource_type => :video )
+        @video = Video.create(
+            title: params[:title], 
+            description: params[:description],  
+            given_video: given_video['url'], 
+            thumbnail: thumbnail['url'])  
         render json: @video  
     end
 
@@ -16,15 +23,15 @@ class VideosController < ApplicationController
         render json: @video
     end
 
-    def home_page
-        byebug
-    end
+    # def home_page
+    #     byebug
+    # end
 
 
 private
 
     def video_params
-        params.require.(:video).permit(:title, :description, :user_id,  :given_video, :thumbnail)
+        params.permit(:title, :description, :user_id,  :given_video, :thumbnail)
     end
 
 end

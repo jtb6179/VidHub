@@ -5,5 +5,10 @@ class User < ApplicationRecord
     has_many :videos
     has_many :comments
 
+    validates :username, uniqueness: true
+    validates :profile_name, uniqueness: true
+    validates :username, presence: true
+    validates :profile_name, presence: true
+
     has_secure_password
 end
