@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+    before_action :authorized, only: [:create]
 
     def index
         @videos = Video.all
@@ -6,17 +7,17 @@ class VideosController < ApplicationController
     end
 
     def create
-        # byebug
-        thumbnail =  Cloudinary::Uploader.upload(params[:thumbnail])
+        thumbnail =  Cloudinary::Uploader.upload_large(params[:thumbnail])
         given_video = Cloudinary::Uploader.upload_large(params[:given_video], :resource_type => :video )
-        theUser = User.find_or_create_by(user_id: user.id)
-        @video = Video.create(
-            title: params[:title], 
-            user_id: theUser,
-            description: params[:description],  
-            given_video: given_video['url'], 
-            thumbnail: thumbnail['url'])  
-        render json: @video  
+        byebug
+       # what is being passed in is an array but not a string
+       #getting this error: TypeError (no implicit conversion of Array into String)
+        # @video = Video.create(
+        #     title: params[:title], 
+        #     description: params[:description],  
+        #     given_video: given_video['url'], 
+        #     thumbnail: thumbnail['url'])  
+        # render json: @video  
     end
 
     def update
