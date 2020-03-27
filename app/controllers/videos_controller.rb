@@ -9,8 +9,10 @@ class VideosController < ApplicationController
         # byebug
         thumbnail =  Cloudinary::Uploader.upload(params[:thumbnail])
         given_video = Cloudinary::Uploader.upload_large(params[:given_video], :resource_type => :video )
+        theUser = User.find_or_create_by(user_id: user.id)
         @video = Video.create(
             title: params[:title], 
+            user_id: theUser,
             description: params[:description],  
             given_video: given_video['url'], 
             thumbnail: thumbnail['url'])  
@@ -28,10 +30,10 @@ class VideosController < ApplicationController
     # end
 
 
-private
+# private
 
-    def video_params
-        params.permit(:title, :description, :user_id,  :given_video, :thumbnail)
-    end
+#     def video_params
+#         params.permit(:title, :description, :user_id,  :given_video, :thumbnail)
+#     end
 
 end

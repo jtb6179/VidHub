@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :comments
 
 
- get '/homepage', to: 'videos#homepage' 
+#  get '/homepage', to: 'videos#homepage' 
  resources :users, only: [:create, :index] 
 
  post '/login', to: 'users#login'
